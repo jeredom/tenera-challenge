@@ -11,15 +11,15 @@ public class WeatherData {
 
     public String id;
     public String name;
-    public Long temperature;
-    public Long pressure;
+    public Double temperature;
+    public Integer pressure;
     public String weatherCondition;
 
     public WeatherData() {
         // For Jackson
     }
 
-    public WeatherData(String id, String name, Long temperature, Long pressure, String weatherCondition) {
+    public WeatherData(String id, String name, Double temperature, Integer pressure, String weatherCondition) {
         this.id = id;
         this.name = name;
         this.temperature = temperature;
@@ -29,8 +29,8 @@ public class WeatherData {
 
     @JsonProperty("main")
     private void unpackTemperaturAndPressureFromNested(Map<String, Object> main) {
-        this.temperature = (Long) main.get("temp");
-        this.pressure = (Long) main.get("pressure");
+        this.temperature = (Double) main.get("temp");
+        this.pressure = (Integer) main.get("pressure");
     }
 
     @JsonProperty("weather")
@@ -54,19 +54,19 @@ public class WeatherData {
         this.name = name;
     }
 
-    public Long getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Long temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 
-    public Long getPressure() {
+    public Integer getPressure() {
         return pressure;
     }
 
-    public void setPressure(Long pressure) {
+    public void setPressure(Integer pressure) {
         this.pressure = pressure;
     }
 
