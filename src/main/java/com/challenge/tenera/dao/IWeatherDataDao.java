@@ -1,4 +1,4 @@
-package com.challenge.tenera.dao.impl;
+package com.challenge.tenera.dao;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.challenge.tenera.model.WeatherData;
 
-public interface WeatherDataDao extends JpaRepository<WeatherData, Long> {
+public interface IWeatherDataDao extends JpaRepository<WeatherData, Long> {
 
     List<WeatherData> findTop5ByNameOrderByCreatedAtDesc(String name);
 

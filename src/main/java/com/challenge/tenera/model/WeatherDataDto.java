@@ -6,10 +6,13 @@ public class WeatherDataDto {
     private Integer pressure;
     private boolean umbrella;
 
-    public WeatherDataDto(WeatherData weatherData) {
-        this.temperature = weatherData.getTemperature();
-        this.pressure = weatherData.getPressure();
-        this.umbrella = weatherData.getWeatherCondition().toLowerCase().matches("thunderstorm|drizzle|rain");
+    public WeatherDataDto() {
+    }
+
+    public WeatherDataDto(Double temperature, Integer pressure, boolean umbrella) {
+        this.temperature = temperature;
+        this.pressure = pressure;
+        this.umbrella = umbrella;
     }
 
     public Double getTemperature() {
