@@ -18,7 +18,7 @@ import com.challenge.tenera.service.IWeatherService;
 @Service
 public class WeatherService implements IWeatherService {
 
-    public static final String CITY_NOT_FOUND_MESSAGE = "City not found";
+    public static final String CITY_NOT_FOUND_ERROR_MESSAGE = "City not found";
     @Autowired
     private IOpenWeatherMapClient openWeatherMapClient;
     @Autowired
@@ -40,7 +40,7 @@ public class WeatherService implements IWeatherService {
     public WeatherDataHistoryDto getWeatherDataHistoryByCityName(String cityName) {
         List<WeatherData> weatherData = weatherDataDao.findTop5ByNameOrderByCreatedAtDesc(cityName);
         if (weatherData == null || weatherData.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, CITY_NOT_FOUND_MESSAGE);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, CITY_NOT_FOUND_ERROR_MESSAGE);
         }
         return modelConverter.convert(weatherData);
     }
