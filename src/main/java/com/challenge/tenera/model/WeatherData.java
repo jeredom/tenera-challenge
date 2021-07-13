@@ -1,30 +1,43 @@
 package com.challenge.tenera.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+@Table(name = "weather")
 public class WeatherData {
 
-    public String id;
+    @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+    @JsonIgnore
     public String name;
     public Double temperature;
     public Integer pressure;
     public String weatherCondition;
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     public WeatherData() {
         // For Jackson
-    }
-
-    public WeatherData(String id, String name, Double temperature, Integer pressure, String weatherCondition) {
-        this.id = id;
-        this.name = name;
-        this.temperature = temperature;
-        this.pressure = pressure;
-        this.weatherCondition = weatherCondition;
     }
 
     @JsonProperty("main")
@@ -38,11 +51,11 @@ public class WeatherData {
         this.weatherCondition = (String) weather.get(0).get("main");
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,6 +89,21 @@ public class WeatherData {
 
     public void setWeatherCondition(String weatherCondition) {
         this.weatherCondition = weatherCondition;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @PrePersist
+    protected void prePersist() {
+        if (createdAt == null) {
+            this.createdAt = new Date();
+        }
     }
 
 }
