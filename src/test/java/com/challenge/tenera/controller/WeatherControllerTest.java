@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import com.challenge.tenera.dao.IWeatherDataDao;
 import com.challenge.tenera.model.WeatherDataDto;
 import com.challenge.tenera.model.WeatherDataHistoryDto;
 
@@ -20,6 +21,9 @@ public class WeatherControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Autowired
+    private IWeatherDataDao weatherDataDao;
 
     @Test
     public void shouldGetCurrentWeatherDataByCityName() {
