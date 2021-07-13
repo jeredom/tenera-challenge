@@ -29,11 +29,12 @@ public class WeatherService implements IWeatherService {
     @Override
     public WeatherDataDto getCurrentWeatherDataByCityName(String cityName) {
         WeatherData weatherData = openWeatherMapClient.getCurrentWeatherDataByCityName(cityName);
+        WeatherData persitedWeatherData = null;
         if (weatherData != null) {
             weatherData.setName(cityName);
-            weatherDataDao.save(weatherData);
+            persitedWeatherData = weatherDataDao.save(weatherData);
         }
-        return modelConverter.convert(weatherData);
+        return modelConverter.convert(persitedWeatherData);
     }
 
     @Override

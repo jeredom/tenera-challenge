@@ -22,7 +22,7 @@ public class ModelConverter implements IModelConverter {
             weatherDataDto.setTemperature(weatherData.getTemperature());
             weatherDataDto.setUmbrella(weatherData.getWeatherCondition() != null
                     ? weatherData.getWeatherCondition().toLowerCase().matches("thunderstorm|drizzle|rain")
-                    : null);
+                    : false);
         }
         return weatherDataDto;
     }
