@@ -40,7 +40,7 @@ public class WeatherController {
             + "form of e.g. \"Berlin\" or \"Berlin,de\". Also contains the average temperature and pressure for this period.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found weather data history", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = WeatherDataDto.class)) }),
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = WeatherDataHistoryDto.class)) }),
             @ApiResponse(responseCode = "404", description = "The city was not found", content = @Content) })
     @GetMapping("/history")
     public ResponseEntity<WeatherDataHistoryDto> getWeatherDataHistoryByCityName(@RequestParam String cityName) {
